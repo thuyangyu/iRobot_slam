@@ -1,0 +1,19 @@
+<launch>
+<arg name="config_file_location" default="$(find zed_cpu_ros)/config/SN2698.conf"/>
+<arg name="camera_namespace" default="stereo"/>
+
+<node pkg="zed_cpu_ros" type="zed_cpu_ros" name="zed_cpu_ros_node" output="screen" ns="$(arg camera_namespace)" required="true">
+	<param name="resolution" value="2"/>
+	<param name="frame_rate" value="30"/>
+	<param name="config_file_location" value="$(arg config_file_location)"/>
+	<param name="show_image" value="false"/>
+	<param name="left_frame_id" value="left_frame"/>
+	<param name="right_frame_id" value="left_frame"/>
+	<param name="load_zed_config" value="false"/>
+</node>
+
+<arg name="pi/2" value="1.5707963267948966"/>
+<node pkg="tf" type="static_transform_publisher" name="base_link_to_camera" args="0.07 0 0.4 0 0 0 base_link stereo_camera 30"/>
+<node pkg="tf" type="static_transform_publisher" name="camera_to_left_frame" args="0 0.06 0 -$(arg pi/2) 0 -$(arg pi/2) stereo_camera left_frame 30"/>
+
+</launch>
