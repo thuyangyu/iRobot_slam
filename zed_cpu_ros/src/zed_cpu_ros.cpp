@@ -33,7 +33,7 @@ public:
 	 */
 	StereoCamera(int resolution, double frame_rate): frame_rate_(30.0) {
 
-		camera_ = new cv::VideoCapture(0);
+		camera_ = new cv::VideoCapture(1);
 		cv::Mat raw;
 		cv::Mat left_image;
 		cv::Mat right_image;
